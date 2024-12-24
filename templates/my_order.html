@@ -1,0 +1,180 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timely Treats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='my_order.css') }}">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body>
+    <div class="style">
+        <h1>My Orders</h1>
+        {% if orders %}
+            {% for order in orders %}
+            <div class="wrapper">
+
+                        <p>Item</p>
+                        <p>Order Category</p>
+                        <p>Quantity</p>
+                        <p>Price per Quantity</p>
+                        <p>Total GST</p>
+                        <p>Gross Total</p>
+                    
+                    </div>
+                <div class="products">
+                        
+                            <p>{{ order[2] }}</p>
+                            <p>{{ order[3] }}</p>
+                            <p>{{ order[4]}}</p>
+                            <p>{{ order[5]}}</p>
+                            <p>{{ order[6] }}</p>
+                            <p>{{ order[7]}}</p>
+                        
+                    {% endfor %}
+            
+                </div>
+        {% else %}
+            <p>No orders found.</p>
+        {% endif %}
+    </div>
+    
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timely Treats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='my_order.css') }}">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    />
+    <style>
+        /* Styling for the navbar */
+        .my-orders-navbar {
+            position: fixed;
+            top: 0;
+            right: -100%; /* Initially hidden */
+            width: 350px;
+            height: 100%;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .my-orders-navbar.active {
+            right: 0; /* Slide in */
+        }
+        .my-orders-navbar .close-btn {
+            text-align: right;
+        }
+        .my-orders-navbar .close-btn button {
+            font-size: 20px;
+            background: none;
+            border: none;
+            color: #dc3545;
+            cursor: pointer;
+        }
+        .my-orders-navbar h1 {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #495057;
+            margin-bottom: 20px;
+        }
+        .wrapper {
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .wrapper p {
+            margin: 0;
+            color: #343a40;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .wrapper p strong {
+            color: #007bff;
+        }
+        .open-orders-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 1100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .open-orders-btn:hover {
+            background: #0056b3;
+        }
+        /* Add a custom scroll bar for better aesthetics */
+        .my-orders-navbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .my-orders-navbar::-webkit-scrollbar-thumb {
+            background: #007bff;
+            border-radius: 4px;
+        }
+        .my-orders-navbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <button class="open-orders-btn" onclick="toggleOrders()">My Orders</button>
+    <div class="my-orders-navbar" id="ordersNavbar">
+        <div class="close-btn">
+            <button onclick="toggleOrders()">✖</button>
+        </div>
+        <h1>My Orders</h1>
+        {% if orders %}
+            {% for order in orders %}
+                <div class="wrapper">
+                    <p><strong>Item:</strong> <span>{{ order[2] }}</span></p>
+                    <p><strong>Order Category:</strong> <span>{{ order[3] }}</span></p>
+                    <p><strong>Quantity:</strong> <span>{{ order[4] }}</span></p>
+                    <p><strong>Price per Quantity:</strong> <span>{{ order[5] }}</span></p>
+                    <p><strong>Total GST:</strong> <span>{{ order[6] }}</span></p>
+                    <p><strong>Gross Total:</strong> <span>{{ order[7] }}</span></p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p style="text-align: center; color: #6c757d;">No orders found.</p>
+        {% endif %}
+    </div>
+
+    <script>
+        function toggleOrders() {
+            const navbar = document.getElementById('ordersNavbar');
+            navbar.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

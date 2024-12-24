@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timely Treats</title>
+<style>
+  /* Center the animation on the page */
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f8f5;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Success circle */
+  .success-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #024908;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    animation: pop 0.4s ease-out forwards;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Pop effect for the circle */
+  @keyframes pop {
+    0% {
+      transform: scale(0);
+    }
+    80% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  /* SVG checkmark */
+  .checkmark {
+    width: 70px;
+    height: 70px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 6;
+    stroke-linecap:round;
+    stroke-linejoin: round;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: drawCheck 0.6s ease forwards 0.3s;
+  }
+
+  /* Drawing effect for checkmark */
+  @keyframes drawCheck {
+    from {
+      stroke-dashoffset: 48;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Success message */
+  .message {
+    font-size: 1.2em;
+    color: #052c08;
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeIn 1s ease 1s forwards;
+  }
+
+  /* Fade-in effect for message */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="success-container">
+  <!-- SVG Checkmark -->
+  <svg class="checkmark" viewBox="0 0 24 24">
+    <path d="M5 13l4 4L19 7" />
+  </svg>
+</div>
+<div class="message">Payment Successful!</div>
+
+</body>
+</html>

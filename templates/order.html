@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orders</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='order.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body>
+
+  <!-- Flash Mesage  -->
+  <!-- {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul>
+    {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %} -->
+
+<!-- {% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+  {% autoescape false %}
+  <script>
+    {% for category, message in messages %}
+        alert("Timely Treats\n\n{{ message | safe }}");
+    {% endfor %}
+  </script>
+  {% endautoescape %}
+{% endif %}
+{% endwith %} -->
+
+<nav class="navbar">
+  <h1>Timely Treats</h1>
+
+  <div class="navbar-menu" onclick="showNavbar()">
+    <i class="fa-solid fa-bars"></i>
+  </div>
+
+  <div id="cart-icon" class="cart-icon" onclick="toggleCart()">
+    <i class="fa-solid fa-cart-shopping"></i>
+  </div>
+</nav>
+
+<button id="back-button" onclick="goBack()"> ⬅ </button> 
+
+<div id="cart-icon" class="cart-icon" onclick="toggleCart()">
+  <i class="fa-solid fa-cart-shopping"></i>
+</div>
+
+
+<!-- Cart Side Bar -->
+
+<div id="cart-sidebar" class="cart-sidebar">
+  <p class="close-btn" onclick="toggleCart()">
+    <i class="fa-solid fa-xmark"></i>
+  </p>
+  <h1>My Cart</h1>
+
+  {% if cart_items %}
+  <div class="contents-10">
+    {% for item in cart_items %}
+    <div class="item-container">
+      <img class="cart-image" src="{{ url_for('static', filename='searching_images/' + item['Image_fileName']) }}" 
+           alt="{{ item['item_name'] }}">
+
+      <div class="item-details">
+        <div class="name-type">
+          <h4 class="name-10">{{ item['item_name'] }}</h4>
+          <h4 class="type-10">{{ item['item_type'] }}</h4>
+        </div>
+        <div class="quantity-price">
+          <div class="cart-item" data-cart-id="{{ item.cart_id }}">
+            <div class="quantity-controls">
+              <button class="minus-btn" data-cart-id="{{ item.cart_id }}">-</button>
+              <input 
+                type="number" 
+                class="quantity" 
+                value="{{ item.quantity }}" 
+                min="1" 
+                data-cart-id="{{ item.cart_id }}"
+              >
+              <button class="plus-btn" data-cart-id="{{ item.cart_id }}">+</button>
+          </div>
+          </div>
+          <p class="price-10"> ₹{{ item['item_price'] }}</p>
+        </div>
+        <div class="total">
+          <p class="total-10">Total: ₹{{ item['total_price'] }}</p>
+        </div>
+      </div>
+
+      <a class="remove-btn" href="#" onclick="removeItem(this)" data-cart-id="{{ item.cart_id }}">Remove</a>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="place-button-10">
+    <a href="/summary_2"><button>Place Order</button></a>
+  </div>
+  {% else %}
+  <p>Your cart is empty.</p>
+  {% endif %}
+</div>
+
+
+  <div class="wrapper">
+    <div class="det">
+    <h1>Product Details</h1>
+  </div>
+    <div class="texts">
+      <form action="/add_to_cart" method="POST">
+        <div class="box">
+          <div class="major-image">
+            {% if product %}
+              <img src="{{ url_for('static', filename='searching_images/' + product['Image_fileName']) }}" 
+                   alt="{{ product['Item_name'] }}" width="450px" height="500px">
+            {% else %}
+              <p>Image not found.</p>
+            {% endif %}
+          </div>
+          <div class="box-2">
+            <ol>
+              {% if item %}
+                <div class="media">
+                  <h1>{{ item['Item_name'] }}</h1>
+                </div>
+                <div class="Price">
+                  <p>Price: </p>
+                  <h4>Rs. {{ item['ItemPrice_per_quanity'] }}</h4>
+                </div>
+                <div class="type">
+                  <p>Measurement: </p>
+                  <h4>{{ item['Item_Quanity']}} - {{item['Quantity_measurement']}}</h4>
+                </div>
+
+                <div class="type-2">
+                  <p>Quantity Type: </p>
+                  <h4>{{ item['Quantity_Type'] }}</h4>
+                </div>
+
+                <!-- Hidden inputs to pass data to backend -->
+                <input type="hidden" name="customer_id" value="{{ session['customer_id'] }}">
+                <input type="hidden" name="item_id" value="{{ item['id'] }}">
+                <input type="hidden" name="item_name" value="{{ item['Item_name'] }}">
+                <input type="hidden" name="item_price" value="{{ item['ItemPrice_per_quanity'] }}">
+                <input type="hidden" name="type" value="{{ item[ 'item_type' ]}}">
+                <div class="align">
+                <h3>Quantity: </h3>
+                <input type="text" name="quantity">
+              </div>
+              {% else %}
+
+                <p>No details found for this item.</p>
+              {% endif %}
+            </ol>
+            <div class="align">
+              <div id="cart-icon" class="cart">
+                <button id="open-cart-btn" class="order-button">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </form>
+    </div>
+    </div>
+  </div>
+
+  <!-- summary inputs -->
+
+  <div class="now">
+    <div class="Onow">
+      <form action="/summary" method="post">
+          <input type="hidden" name="item_id" value="{{ item['id'] }}">
+          <input type="hidden" name="item_name" value="{{ item['Item_name'] }}">
+          <input type="hidden" name="item_price" value="{{ item['ItemPrice_per_quanity'] }}">
+          <!-- <div class="align">
+            <p>Quantity</p>
+            <input type="number" name="quantity" min="1" max="100" step="1" required>
+          </div> -->
+          <input type="hidden" name="item_image" value="{{ product['Image_fileName'] }}">
+          <input type="hidden" name="item_Type" value="{{ item['item_type'] }}">
+          <!-- <button type="submit">Order Now</button> -->
+      </form>
+  </div>
+  
+</div>
+
+  <!-- Other items -->
+  <div class="product-section">
+    <h1>Sweets Collections</h1>
+    <div class="products" id="products">
+      {% for sweet in sweets %}
+      <div class="product-box">
+        <a href="{{ url_for('order_details', id=sweet.get('id', 0)) }}" class="order-link">
+          <img src="{{ url_for('static', filename='searching_images/' + sweet['Image_fileName']) }}" alt="{{ sweet['Item_name'] }}" width="200px" height="200px">
+        </a>
+        <h4>{{ sweet['Item_name'] }}</h4>
+
+        {% if sweet['stock'] > 0 %}
+        <!-- Order Now -->
+        {% else %}
+          <!-- Display Out of Stock message if no stock -->
+          <p class="out-of-stock">Out of Stock</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+
+  <div class="product-section">
+    <h1>Karas</h1>
+    <div class="products" id="products">
+      {% for savory in savories %}
+      <div class="product-box">
+        <a href="{{ url_for('order_details', id=savory.get('id', 0)) }}" class="order-link">
+          <img src="{{ url_for('static', filename='searching_images/' + savory['Image_fileName']) }}" alt="{{ savory['name'] }}" width="200px" height="200px">
+        </a>
+        <h4>{{ savory['Item_name'] }}</h4>
+
+        {% if savory['stock'] > 0 %}
+        {% else %}
+          <!-- Display Out of Stock message if no stock -->
+          <p class="out-of-stock">Out of Stock</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+
+  
+    <!-- Footer -->
+
+    <footer>
+      <div class="footer-container">
+        <!-- Contact Section -->
+        <div class="footer-contact">
+          <h3>Contact Us</h3>
+          <p>123, Sweets Street,<br> Coimbatore, India - 641105</p>
+          <p>Phone: +91 73588 13047</p>
+          <p>Email: timelytreats0047@gmail.com</p>
+        </div>
+    
+        <!-- Quick Links -->
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="home">Home</a></li>
+            <li><a href="#" class="our-story-link">Our Story</a></li>
+            <li><a href="items.html">Shop All</a></li>
+            <li><a href="privacy">Privacy Policy</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+          </ul>
+        </div>
+    
+        <!-- Social Media -->
+        <div class="footer-social">
+          <h3>Follow Us</h3>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    
+      <!-- Copyright -->
+      <div class="footer-bottom">
+        <p>&copy; 2024 Timely Treats. All rights reserved.</p>
+      </div>
+
+      
+
+      <div class="about-us" style="display: none;">
+        <h5 class= "back-to-footer">Back</h5>
+        <h3>Our Story</h3>
+
+<p>Welcome to Timely Treats – your one-stop destination for delectable delights delivered just in time!
+
+At Timely Treats, we believe in making every celebration special and every ordinary day extraordinary. What started as a passion for crafting irresistible sweets and snacks has now blossomed into a platform that brings the joy of fresh, homemade treats to your doorstep.
+
+Our journey began with a simple mission: to blend tradition with convenience. We honor age-old recipes and combine them with modern techniques to ensure every bite is a delightful experience. Whether you're craving nostalgic flavors or exploring new tastes, our menu has something for everyone.
+</p>
+<br>
+
+<h4>Why Choose Us?</h4>
+<br>
+
+<p><h4>Freshness Guaranteed:</h4> 
+      Each item is prepared with the finest ingredients to ensure unparalleled taste and quality.</p>
+<p><h4>Seasonal Specials:</h4> 
+      Our treats are tailored to match the seasons and festivals, keeping the joy alive all year round.</p>
+<p><h4>Timely Delivery:</h4>
+      As our name suggests, we take pride in ensuring your treats arrive right when you need them.</p>
+<br>
+<p>At Timely Treats, it’s more than just food – it’s about creating memories, spreading happiness, and sharing the love of good taste.
+
+Join us on this flavorful journey, and let’s make every moment sweet and savory together!</p>
+  </div>
+
+    </footer>
+
+  <script src="{{url_for('static', filename='collection.js')}}"></script>
+  <script src="{{ url_for('static', filename='order.js') }}"></script>
+  <script src="{{ url_for('static', filename='index.js') }}"></script>
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>

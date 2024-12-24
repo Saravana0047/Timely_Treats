@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>    
+    <!-- CSS LINk -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='signup.css') }}">
+
+    <!-- font awesome link -->
+     <link 
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+     crossorigin="anonymous"
+     referrerpolicy="no-referrer"/>
+     <style>
+     body{
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+        background-size: cover;
+        background-color: transparent; 
+        left: 70px;
+        }
+    
+    
+        .major-contact{
+            display: flex;
+            justify-content: 50px left;
+            align-items: left;
+            min-height: 90vh;
+            margin-left: 250px;
+        }
+        .contact{
+          padding: 10px;
+          padding-right: 100px;
+          padding-left:100px;
+          padding-top: 10px;
+          /* padding-bottom: 10px; */
+          margin-top: 50px;
+          align-items: center;
+          justify-content: center;
+          background: transparent;
+          border-radius: 10px;
+          box-shadow: 0 0 15px rgba(35, 84, 218, 0.2);
+          width: 300px;
+          border-bottom: 100px;
+        }
+        
+        .contact h1{
+          color: rgb(121, 0, 74);
+          padding-bottom: -200px;
+          text-align: center;
+          margin-bottom: -50px;
+          padding-left: -10%;
+          margin-top: 70px;
+        }
+        
+        .contact label{
+          color:#0f2341;
+          display: block;
+          margin-bottom: 5px;
+        }
+        
+        .contact-container input[type="email"]{
+          background: transparent;
+          width: calc(72% - 20px);
+          padding: 10px;
+          padding-right: 30%;
+          border: 1px solid #303d52;
+          border-radius: 40px;
+          margin-top:70px;
+          justify-content: left;
+        }
+        
+        .contact-container input[type="password"]{
+          width: calc(72% - 20px);
+          margin-bottom: 5px;
+          margin-top: 50px;
+          padding: 10px;
+          padding-right: 30%;
+          border: 1px solid #0f2341;
+          border-radius: 40px;
+          background: transparent;
+        }
+      
+        .hover button{
+          width: 100%;
+          padding: 20px;
+          padding-right: 20px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          margin-top: 150px;
+          background-color: #0f2341;
+          color: rgb(66, 20, 20);
+          cursor: pointer;
+          border-radius: 40px;
+        }
+        
+        #contact-button{
+          width: calc(72% - 20px);
+          background: transparent;
+          margin-top: 50px;
+          justify-content: center;
+          align-items: center;
+          display: flex;
+          justify-content: center;
+          width: 50%;
+          margin-left: 23%;
+        }
+    
+        .names{
+          display: flex;
+          width: 104%;
+          
+        }
+    
+        .names ::placeholder{
+          overflow: visible;
+          width: 100%;
+        }
+    
+        .contact-container input:hover{
+          background: rgb(225, 225, 225, 0.25);
+          box-shadow: 2px;
+          border-radius: 40px;
+        }
+    
+        .names i{
+          position: relative;
+          height: -100px;
+          size: 10px;
+          top: 25px;
+          right: 30px;
+          color: #0f2341;
+        }
+    
+        .namess{
+          display: flexbox;
+        }
+    
+        .namess i{
+          position:relative;
+          height: -100px;
+          bottom: 27px;
+          left: 271px;
+        }
+          
+        
+      
+        .forget-link a{
+          color: rgb(19, 19, 95);
+          text-decoration: none;
+        }
+      
+        .forget-link{
+          padding-top: 20px;
+        }
+      
+        .forget-link a:hover{
+          text-decoration: underline;
+        }
+      
+        .signup{
+          color: #020d20;
+          display: flex;
+          justify-content: center;
+          padding: 25px;
+          padding-top: 10px;
+        }
+      
+        .signup a{
+          color: #020d20;
+          text-decoration: none;
+        }
+      
+        .signup a:hover{
+          text-decoration: underline;
+        }
+    
+        
+      /* Media Queries */
+        @media screen and (max-width: 700px) {
+        
+      }</style>
+</head>
+<body>
+
+    <div class="major-contact">
+        <div class="contact">
+            <h1 class="text-container">Admin Signup</h1>
+            <div class="contact-container">
+                <form action="{{ url_for('admin_signup')}}" method="POST">
+                    
+                    <!-- email -->
+                    <p><input type="email" name="username" placeholder="Enter Your Username" required>
+                    
+                    <!-- message -->             
+                    <input type="password" name="password" placeholder="Enter your Password" required>
+                    
+                    </div>
+                    <div class="hover">
+                    <!-- button -->
+                    <p><button class="contact-button" id="contact-button" type="submit">Signup</button></p>
+                    </div>
+
+                        <div class="signup">
+                            <p>Already have an account?
+                            <a href="signup">Login</a></p>
+                        </div> 
+                    </div>
+                </form>
+            </div>
+
+    
+</body>
+</html>
+

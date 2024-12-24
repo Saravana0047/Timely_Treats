@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Timely Treats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='summary.css') }}">
+</head>
+<body>
+  <div class="main-container">
+    <div class="order-shipping-container">
+
+      <!-- Order Summary Section -->
+      <div class="order-summary">
+        <h2>Order Summary</h2>
+        
+        <div class="D-container">
+          <img src="{{ url_for('static', filename='searching_images/' + (item_image if item_image else 'default.jpg')) }}" alt="{{ item_name }}" width="70px">
+
+          <div class="name"><p>{{ item_name }}</p></div>
+          <div class="quantity"><p>Quantity: {{ quantity }}</p></div>
+          <div class="price"><p>Rs. {{ item_price }}</p></div>
+        </div>
+        <div class="line"></div>
+        <div class="subtotal">
+          <div class="sub">
+            <p>Subtotal</p>
+          </div>
+          <div class="total">Rs. {{ total_amount }}</div>
+        </div>
+        <div class="contents">
+          <div class="align-ship">
+            <p>Shipping</p>
+          </div>
+          <div class="gapcal">To be Calculated</div>
+        </div>
+        <div class="line"></div>
+        <div class="amount-container">
+          <h3>Total</h3>
+        </div>
+        <div class="totcon"><h3>Rs. {{ total_amount }}</h3></div>
+      </div>
+
+      <!-- Shipping Address and Payment Container -->
+      <div id="form-container">
+        <!-- Shipping Address Section -->
+        <div class="shipping-address" id="shipping-address">
+          <h2>Shipping Address</h2>
+          <form id="shipping-form" action="{{ url_for('process_payment') }}" method="post">
+            <form action="/process_payment" method="POST" id="payment-form">
+            <input type="text" name="fullname" placeholder="Full Name">
+            <div class="address">
+              <input type="text" name="address" placeholder="Address (House no, Building, Street, Area)">
+            </div>
+            <div class="city">
+              <div class="pincode">
+                <input type="number" name="pincode" placeholder="Pincode">
+              </div>
+              <div class="cityinput">
+                <input type="text" name="city" placeholder="City" >
+              </div>
+              <div class="state">
+                <input type="text" name="state" placeholder="State">
+              </div>
+            </div>
+            <input type="email" name="email" placeholder="Enter your Mail" >
+            <div>
+              <input type="checkbox" name="billing-same-as-shipping" id="billing-checkbox">
+              <label for="billing-checkbox">Billing address is same as Shipping address</label>
+            </div>
+            <form action="/my_order" method="POST" id="order-form">
+              <input type="hidden" name="customer_id" value="{{ session['customer_id'] }}">
+              <input type="hidden" name="item" value="{{ item_name }}">
+              <input type="hidden" name="order_category" value="{{ order_category }}">
+              <input type="hidden" name="quantity" value="{{ quantity }}">
+              <input type="hidden" name="price_per_quantity" value="{{ item_price }}">       
+          
+          <button type="button" id="save-continue-button">Save & Continue</button>
+          
+            
+          
+        </div>
+
+        <!-- Hidden for order table -->
+
+        <!-- Payment Field -->
+
+        
+        <div class="payment-field" id="payment-field" style="display:none;">
+          <div class="top">
+          
+            <h2>Select Payment Method</h2>
+            <input type="radio" id="upi" name="payment_method" value="UPI" >
+            <label for="upi">UPI</label><br>
+
+            <input type="radio" id="card" name="payment_method" value="Card">
+            <label for="card">Card</label><br>
+
+            <input type="radio" id="cod" name="payment_method" value="COD">
+            <label for="cod">Cash on Delivery</label><br>
+          </div>
+            <!-- UPI Payment Fields -->
+            <div class="payment-type">
+              <div class="upi" id="upi_section" style="display:none;">
+                <label for="upi_id">UPI ID:</label>
+                <input type="text" id="upi_id" name="upi_id" >
+              </div>
+
+              <!-- Card Payment Fields -->
+              <div class="card" id="card_section" style="display:none;">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" >
+
+                <label for="card_number">Card Number:</label>
+                <input type="text" id="card_number" name="card_number">
+
+                <label for="expiry_date">Expiration Date (MM/YY):</label>
+                <input type="text" id="expiry_date" name="expiry_date" >
+
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv">
+              </div>
+            </div>
+            <button type="submit">Pay Now</button>
+          </form>
+        </form>
+      </form>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='order.js') }}"></script>
+  <script>
+    

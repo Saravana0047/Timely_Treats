@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timely Treats - Reset Password</title>
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='newpass.css') }}">
+</head>
+<body>
+
+    <!-- Flash messages for feedback -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul>
+      {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+    {% endwith %}
+
+    <div class="wrapper">
+        <div class="container">
+            <h1>Reset Password</h1>
+            <div class="boxes">
+                <!-- Form to submit the new password -->
+                <form action="{{ url_for('reset_password', token=token, _external=True) }}" method="POST">
+                    <label>New Password</label>
+                    <input type="password" name="password" placeholder="Enter new password" required>
+
+                    <label>Confirm Password</label>
+                    <input type="password" name="conpassword" placeholder="Confirm new password" required>
+
+                    <!-- Button -->
+                    <div class="button" id="button">
+                        <button type="submit">Create Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

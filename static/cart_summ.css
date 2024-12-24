@@ -1,0 +1,141 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ebe26c;
+    margin: 0;
+    padding: 0;
+}
+
+/* Cart container */
+.cart-container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Cart header */
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.cart-header h1 {
+    font-size: 1.8em;
+    color: #333;
+}
+
+.close-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.close-button:hover {
+    background-color: #ff3333;
+}
+
+/* Cart items */
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.cart-item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.item-details {
+    flex: 1;
+}
+
+.item-details h4 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.item-details p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 0.9em;
+}
+
+.remove-link {
+    color: #ff4d4d;
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.remove-link:hover {
+    text-decoration: underline;
+}
+
+/* Place order button */
+.place-order {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.place-order-button {
+    background-color: #8b0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.place-order-button:hover {
+    background-color: #a52a2a;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .cart-container {
+        padding: 15px;
+    }
+
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cart-item img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .item-details h4 {
+        font-size: 1em;
+    }
+
+    .item-details p {
+        font-size: 0.8em;
+    }
+
+    .place-order-button {
+        width: 100%;
+    }
+}

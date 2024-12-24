@@ -1,0 +1,177 @@
+body{
+    background: url(images/Bground.jpg.webp);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: transparent; 
+    left: 70px;
+    }
+
+
+    .major-contact{
+        display: flex;
+        justify-content: 50px left;
+        align-items: left;
+        min-height: 90vh;
+        margin-left: 250px;
+    }
+    .contact{
+      padding: 10px;
+      padding-right: 100px;
+      padding-left:100px;
+      padding-top: 10px;
+      /* padding-bottom: 10px; */
+      margin-top: 50px;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(35, 84, 218, 0.2);
+      width: 300px;
+      border-bottom: 100px;
+    }
+    
+    .contact h1{
+      color: rgb(121, 0, 74);
+      padding-bottom: 5px;
+      text-align: center;
+      margin-bottom: 20px;
+      padding-left: -10%;
+    }
+    
+    .contact label{
+      color:#0f2341;
+      display: block;
+      margin-bottom: 5px;
+    }
+    
+    .contact-container input[type="text"]{
+      background: transparent;
+      width: calc(72% - 20px);
+      padding: 10px;
+      padding-right: 30%;
+      border: 1px solid #303d52;
+      border-radius: 40px;
+      /* margin: 10px 0; */
+      justify-content: left;
+    }
+    
+    .contact-container input[type="password"]{
+      width: calc(72% - 20px);
+      margin-bottom: 5px;
+      margin-top: 15px;
+      padding: 10px;
+      padding-right: 30%;
+      border: 1px solid #0f2341;
+      border-radius: 40px;
+      background: transparent;
+    }
+    .contact-container input[name="address"]{
+      margin-top:10px ;
+    }
+
+    .address-icon{
+      bottom: 40%;
+    }
+  
+  
+    .contact-container button{
+      width: 100%;
+      padding: 20px;
+      padding-right: 20px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      margin-top: 20px;
+      background-color: #0f2341;
+      color: rgb(66, 20, 20);
+      cursor: pointer;
+      border-radius: 40px;
+    }
+    
+    #contact-button{
+      width: calc(72% - 20px);
+      background: transparent;
+      margin-top: -12px;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      width: 50%;
+      margin-left: 23%;
+    }
+
+    .names{
+      display: flex;
+      width: 104%;
+      
+    }
+
+    .names ::placeholder{
+      overflow: visible;
+      width: 100%;
+    }
+
+    .contact-container input:hover{
+      background: rgb(225, 225, 225, 0.25);
+      box-shadow: 2px;
+      border-radius: 40px;
+    }
+
+    .names i{
+      position: relative;
+      height: -100px;
+      size: 10px;
+      top: 25px;
+      right: 30px;
+      color: #0f2341;
+    }
+
+    .namess{
+      display: flexbox;
+    }
+
+    .namess i{
+      position:relative;
+      height: -100px;
+      bottom: 27px;
+      left: 271px;
+    }
+      
+    
+  
+    .forget-link a{
+      color: rgb(19, 19, 95);
+      text-decoration: none;
+    }
+  
+    .forget-link{
+      padding-top: 20px;
+    }
+  
+    .forget-link a:hover{
+      text-decoration: underline;
+    }
+  
+    .signup{
+      color: #020d20;
+      display: flex;
+      justify-content: center;
+      padding: 25px;
+      padding-top: 10px;
+    }
+  
+    .signup a{
+      color: #020d20;
+      text-decoration: none;
+    }
+  
+    .signup a:hover{
+      text-decoration: underline;
+    }
+
+    
+  /* Media Queries */
+    @media screen and (max-width: 700px) {
+    
+  }

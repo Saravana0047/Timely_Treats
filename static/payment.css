@@ -1,0 +1,152 @@
+body{
+    background-color: #ebe26c;
+}
+
+/* Main container */
+.main-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Order and Shipping Container */
+.order-shipping-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Order Summary */
+.order-summary {
+    background-color: #eeeded;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 30%;
+}
+
+.shipping-address{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 60%;
+}
+
+/* Styling for sections */
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.line {
+    border-bottom: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+button {
+    background-color: #8b0000;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1em;
+    margin-top: 15px;
+}
+
+button:hover {
+    background-color: #a52a2a;
+}
+
+.name{
+    text-align: left;
+    margin-left: 95px;
+    margin-top: -90px;
+    margin-bottom: 70px;
+}
+
+.quantity{
+    
+    float: right;
+    margin-right: 135px;
+    margin-top: -60px;
+}
+
+.price{
+    float: right;
+    margin-top: -60px;
+    margin-right: -10px;
+    padding-right: 10px;
+}
+
+/* .subtotal{
+    display: flex;
+    gap: 50px;
+} */
+
+.total{
+    float: right;
+    margin-top: -32px;
+    margin-right: -10px;
+    padding-right: 10px;
+
+}
+
+.gapcal{
+    float: right; 
+    margin-top: -30px;
+    margin-right: -10px;
+    padding-right: 10px;
+}
+
+.align-ship{
+    margin-top: 10px;
+    padding-right: 10px;
+}
+
+.totcon{
+    float: right;
+    margin-top: -60px;
+}
+
+/* Input and form styles */
+input[type="text"], input[type="number"], input[type="email"] {
+    width: calc(100% - 20px);
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 7px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.city{
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    padding-left: 10px;
+    width: 100%;
+    margin-left: -10px;
+}
+
+.address input{
+    padding-bottom: 50px;
+}
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .order-shipping-container {
+        flex-direction: column;
+    }
+    .order-summary, .shipping-address {
+        width: 100%;
+    }
+}

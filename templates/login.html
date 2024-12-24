@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timely Treats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='loginstyle.css') }}" >
+</head>
+<body>
+
+    <div class="major-contact">
+        <div class="contact">
+            <h1 class="text-container">Log In</h1>
+            <div class="contact-container">
+                <form action="{{ url_for('login')}}" method="POST">
+                    <!-- flask form -->
+                     <form action="/login" method="POST">
+                    <!-- email -->
+                    <label for="text">Username</label>
+                    <p><input type="text" name="Username" placeholder="Enter Your Username" required></p>
+                    <!-- message -->
+                    <label for="message">Password</label>
+                    <p><input type="password" name="Password" placeholder="Enter your Password" required></p>
+                    
+                     <div class="links">
+                          <div class="forget-link">
+                            <a href="forget_password">Forget Password?</a>
+                        </div>
+                    <!-- button -->
+                    <p><button class="contact-button" id="contact-button" type="">Login</button></p>
+
+                        <div class="signup">
+                            <p>Don't have an account?
+                            <a href="signup">Sign Up</a></p>
+                        </form>
+                        </div> 
+                    </div>
+                </form>
+            </div>
+
+    
+</body>
+</html>
+

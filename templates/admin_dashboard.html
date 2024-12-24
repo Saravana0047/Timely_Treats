@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dash_style.css') }}" >
+</head>
+<body>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% autoescape false %}
+      <script>
+        {% for category, message in messages %}
+            alert("Timely Treats\n\n{{ message | safe }}");
+        {% endfor %}
+      </script>
+      {% endautoescape %}
+    {% endif %}
+  {% endwith %}
+  
+
+    <div class="wrapper">
+        <div class="dashboard-container">
+            <aside class="sidebar">
+                <h2>Timely Treats</h2>
+                <ul>
+                    <li><a href="{{ url_for('admin_dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ url_for('admin_logout') }}">Logout</a></li>
+                </ul>
+            </aside>
+            <div class="content-container">
+                <h1>Inventory Management</h1>
+                <table class="inventory-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Item Name</th>
+                            <th>Stock</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in inventory %}
+                        <tr>
+                            <td>{{ item[0] }}</td>
+                            <td>{{ item[1] }}</td>
+                            <td>{{ item[2] }}</td>
+                            <td>
+                                <form action="{{ url_for('update_item') }}" method="POST" style="display:inline;">
+                                    <input type="hidden" name="item_id" value="{{ item[0] }}">
+                                    <input type="text" name="quantity" placeholder="Enter quantity">
+                                    <button type="submit" class="update">Update</button>
+                                </form>
+                                <form action="{{ url_for('delete_item') }}" method="POST" style="display:inline;">
+                                    <input type="hidden" name="item_id" value="{{ item[0] }}">
+                                    <button type="submit" class="delete">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    
+</body>
+</html>

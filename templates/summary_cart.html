@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Timely Treats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='summary.css') }}">
+    <style>
+
+        .cart-items {
+            max-height: 300px; /* Limit the height to 3 visible items */
+            overflow-y: auto;  /* Enable vertical scrolling */
+        }
+
+        .cart-item {
+            margin-bottom: 10px; /* Space between items */
+        }
+
+        /* Optional styling for the container */
+        .cart-container {
+            max-width: 500px; /* Adjust width as needed */
+            margin-left: 20px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        /* Scrollbar styling */
+        .cart-items::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .cart-items::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 4px;
+        }
+
+        .cart-items::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+
+        .payment-field {
+            display: none;
+        }
+
+        .upi input[type="text"],
+        .card input {
+            width: 85%;
+            padding: 12px;
+            margin-top: 12px;
+            border-radius: 7px;
+            border: 1px solid #ccc;
+        }
+
+    .payment-field {
+        width: 50%;
+        border-radius: 7px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        margin-right: 70px;
+        margin-left: 50px;
+        margin-bottom: 20px;
+        padding-right: 140px;
+        padding-left: 140px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+            
+    }
+    .card{
+        margin: 0 auto;
+    }
+
+    #back-button{
+    font-size: 25px;
+    padding: 0px 7px;
+    padding-bottom: 5px;
+    border-radius: 30px;
+    margin-top: 20px;
+    margin-left: 10px;
+    }
+
+    #back-button:hover{
+    cursor: pointer;
+
+  }
+  
+    </style>
+</head>
+<body>
+
+    <button id="back-button" onclick="goBack()"> ⬅ </button> 
+
+    <div class="main-container">
+        <div class="order-shipping-container">
+            <!-- Order Summary Section -->
+            <div class="cart-container">
+                <div class="cart-header">
+                    <h1>My Cart</h1>
+
+                </div>
+
+                {% if cart_items %}
+                <div class="cart-items">
+                    {% for item in cart_items %}
+                    <div class="cart-item">
+                        <img src="{{ url_for('static', filename='searching_images/' + item['Image_fileName']) }}" alt="{{ item['item_name'] }}">
+                        <div class="item-details">
+                            <h4>{{ item['item_name'] }}</h4>
+                            <p>Type: {{ item['item_type'] }}</p>
+                            <p>Price: Rs. {{ item['item_price'] }}</p>
+                            <p>Quantity: {{ item['quantity'] }}</p>
+                            <p>Total: Rs. {{ item['total_price'] }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    {% endfor %}
+                </div>
+
+                {% else %}
+                <p>Your cart is empty.</p>
+                {% endif %}
+            </div>
+
+            <!-- Shipping Address and Payment Container -->
+            <div id="form-container">
+                <form id="shipping-form" action="{{ url_for('process_payment') }}" method="post">
+                <!-- Shipping Address Section -->
+                <div class="shipping-address" id="shipping-address">
+                    <h2>Shipping Address</h2>
+                        <input type="text" name="fullname" placeholder="Full Name">
+                        <div class="address">
+                            <input type="text" name="address" placeholder="Address (House no, Building, Street, Area)">
+                        </div>
+                        <div class="city">
+                            <div class="pincode">
+                                <input type="number" name="pincode" placeholder="Pincode">
+                            </div>
+                            <div class="cityinput">
+                                <input type="text" name="city" placeholder="City">
+                            </div>
+                            <div class="state">
+                                <input type="text" name="state" placeholder="State">
+                            </div>
+                        </div>
+                        <input type="email" name="email" placeholder="Enter your Mail">
+                        <div>
+                            <input type="checkbox" name="billing-same-as-shipping" id="billing-checkbox">
+                            <label for="billing-checkbox">Billing address is same as Shipping address</label>
+                        </div>
+                    <div class="place-order">
+                        <a href="javascript:void(0);">
+                            <button class="place-order-button" id="save-continue-button">Save & Continue</button>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Payment Field (Initially Hidden) -->
+                <form id="shipping-form" action="{{ url_for('process_payment') }}" method="post">
+                <div class="payment-field" id="payment-field">
+                    <h2>Select Payment Method</h2>
+                    <input type="radio" id="upi" name="payment_method" value="UPI">
+                    <label for="upi">UPI</label><br>
+
+                    <input type="radio" id="card" name="payment_method" value="Card">
+                    <label for="card">Card</label><br>
+
+                    <input type="radio" id="cod" name="payment_method" value="COD">
+                    <label for="cod">Cash on Delivery</label><br>
+
+                    <!-- UPI Payment Fields -->
+                    <div class="upi" id="upi_section" style="display:none;">
+                        <label for="upi_id">UPI ID:</label>
+                        <input type="text" id="upi_id" name="upi_id">
+                    </div>
+
+                    <!-- Card Payment Fields -->
+                    <div class="card" id="card_section" style="display:none;">
+                        <label for="name">Full Name:</label>
+                        <input type="text" id="name" name="name">
+
+                        <label for="card_number">Card Number:</label>
+                        <input type="text" id="card_number" name="card_number">
+
+                        <label for="expiry_date">Expiration Date (MM/YY):</label>
+                        <input type="text" id="expiry_date" name="expiry_date">
+
+                        <label for="cvv">CVV:</label>
+                        <input type="text" id="cvv" name="cvv">
+                    </div>
+
+                    <button type="submit">Pay Now</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    </form>
+    </div>
+    <script src="{{ url_for('static', filename='order.js') }}"></script>
+    <script>
+        function goBack() {
+          window.history.back();
+        }
+      </script>
+</body>
+</html>

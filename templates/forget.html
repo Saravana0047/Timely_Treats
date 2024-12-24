@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timely Treats - Reset Password</title>
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='forget.css') }}">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <h1>Reset Password</h1>
+            
+            <!-- Form to request password reset -->
+            <form action="{{ url_for('forget_password') }}" method="POST">
+                <div class="boxes">
+                    <label for="email">E-Mail</label>
+                    <input type="email" id="email" name="username" placeholder="Enter your email" required>
+                </div>
+                
+                <!-- Button -->
+                <div class="button" id="button">
+                    <button type="submit">Continue</button>
+                </div>
+            </form>
+
+            <!-- Flash messages for feedback -->
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    <ul>
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                        <a href="{{reset_link}}">Click here</a>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+</body>
+</html>

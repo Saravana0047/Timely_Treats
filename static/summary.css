@@ -1,0 +1,433 @@
+body{
+    background-color: #ebe26c;
+}
+
+/* Main container */
+.main-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Order and Shipping Container */
+.order-shipping-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Order Summary */
+.order-summary {
+    background-color: #eeeded;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 30%;
+}
+
+.shipping-address{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 93%;
+}
+
+/* Styling for sections */
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.line {
+    border-bottom: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+.shipping-address button{
+    background-color: #8b0000;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1em;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+button:hover {
+    background-color: #a52a2a;
+}
+
+.name{
+    text-align: left;
+    margin-left: 95px;
+    margin-top: -90px;
+    margin-bottom: 70px;
+}
+
+.quantity{
+    
+    float: right;
+    margin-right: 115px;
+    margin-top: -60px;
+}
+
+.price{
+    float: right;
+    margin-top: -60px;
+    margin-right: -10px;
+    padding-right: 10px;
+}
+
+/* .subtotal{
+    display: flex;
+    gap: 50px;
+} */
+
+.total{
+    float: right;
+    margin-top: -32px;
+    margin-right: -10px;
+    padding-right: 10px;
+
+}
+
+.gapcal{
+    float: right; 
+    margin-top: -30px;
+    margin-right: -10px;
+    padding-right: 10px;
+}
+
+.align-ship{
+    margin-top: 10px;
+    padding-right: 10px;
+}
+
+.totcon{
+    float: right;
+    margin-top: -60px;
+}
+
+/* Input and form styles */
+.shipping-address input[type="text"], input[type="number"], input[type="email"] {
+    width: calc(100% - 20px);
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 7px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.city{
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    padding-left: 10px;
+    width: 100%;
+    margin-left: -10px;
+}
+
+.address input{
+    padding-bottom: 50px;
+}
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Styling for the payment field */
+.payment-field {
+    
+    width: 100%;
+    padding: 20px;
+    border-radius: 7px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-right: 70px;
+    margin-left: -300px;
+    padding: 100px;
+    margin-bottom: 20px;
+    padding-right: 140px;
+    padding-left: 140px;
+    
+}
+
+
+.payment-type {
+    margin-top: 10px;
+}
+
+.top{
+    margin-top: -90px;
+    margin-bottom: 10px;
+}
+.payment-type input[type="text"],
+.payment-type input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border-radius: 7px;
+    border: 1px solid #ccc;
+}
+
+
+.payment-type label {
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+
+.upi {
+    margin-top: 20px;
+}
+
+
+.card {
+    margin-top: 20px;
+}
+
+.payment-field button{
+    background-color: #8b0000;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1em;
+    margin-top: 35px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .order-shipping-container {
+        flex-direction: column;
+    }
+    .order-summary, .shipping-address {
+        width: 100%;
+    }
+    .payment-field {
+        padding: 20px;
+    }
+
+}
+
+
+/* summary_cart */
+
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ebe26c;
+    margin: 0;
+    padding: 0;
+}
+
+/* Cart container */
+.cart-container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Cart header */
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.cart-header h1 {
+    font-size: 1.8em;
+    color: #333;
+}
+
+.close-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.close-button:hover {
+    background-color: #ff3333;
+}
+
+/* Cart items */
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.cart-item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.item-details {
+    flex: 1;
+}
+
+.item-details h4 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.item-details p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 0.9em;
+}
+
+.remove-link {
+    color: #ff4d4d;
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.remove-link:hover {
+    text-decoration: underline;
+}
+
+/* Place order button */
+.place-order {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.place-order-button {
+    background-color: #8b0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.place-order-button:hover {
+    background-color: #a52a2a;
+}
+
+@media (max-width: 700px) {
+        /* Example: Adjust header layout */
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+        }
+    
+        /* Adjust navbar for small screens */
+        .navbar {
+            display: none; /* Hide original navbar */
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 0;
+        }
+    
+        /* Toggle button for small screens */
+        .navbar-toggle {
+            display: block;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+        }
+    
+        /* Show menu when the toggle button is clicked */
+        .navbar.active {
+            display: flex;
+        }
+    
+        /* Style for content sections */
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+    
+        /* Adjust images */
+        img {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+        }
+    
+        /* Example: Adjust the footer layout */
+        footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+        }
+    
+        /* Adjust card layout */
+        .card {
+            width: 100%;
+            margin: 10px 0;
+            padding: 20px;
+        }
+
+        .cart-item{
+            padding-right: 60px;
+            
+        }
+
+        .order-shipping-container{
+            align-items: center;
+        }
+
+        .cart-container{
+            margin-left: -10px;
+        }
+
+        .shipping-address{
+            margin-left: -10px;
+            padding: 10px;
+        }
+
+        .main-container{
+            width: 80%;
+        }
+
+        #payment-field{
+            margin: 0 10px;
+            padding-right: 80px;
+            padding-left: 80px
+        }
+
+        .card input{
+            margin-bottom: 10px;
+        }
+
+
+    }
+

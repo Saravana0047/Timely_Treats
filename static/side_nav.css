@@ -1,0 +1,77 @@
+body{
+    display: flex;
+    justify-content: right;
+    align-items: right;
+}
+
+.line{
+    border: 1px solid black;
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+.line-2{
+    border-bottom: 2px solid black;
+    margin-left: -60px;
+    margin-right: -20px;
+    margin-top: 20px;
+}
+
+.navbar {
+    box-shadow: 0 0 15px rgba(3, 19, 63, 0.2);
+    width: 30%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    /* right: -60%; */
+    padding: 20px;
+    color: #0f2341;
+    transition: 2s;
+  }
+
+  .name{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    margin-left: 90px;
+    margin-top: -150px;
+  }
+
+  .details{
+    margin-top: -20px;
+    margin-left:110px;
+  }
+
+  .inputs input{
+    padding: 9px;
+    border-radius: 15px;
+    margin-top: -60px;
+    margin-left: 110px;
+    cursor: pointer;
+  }
+
+  .button button{
+    width: 100%;
+    padding: 15px;
+    border-radius: 50px;
+    margin-top: 320px;
+    margin-left: -20px;
+  }
+
+  .button button:hover{
+    background-color: #05142b;
+    color: #ffff;
+    cursor:grab;
+  }
+
+  .button p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 35px;
+  }
+
+  .navbar i{
+    float: right;
+    margin-top: -50px;
+  }

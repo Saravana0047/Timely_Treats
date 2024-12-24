@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timely Treats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='side_nav.css') }}">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body>
+    <div class="navbar">
+        <div>
+            <h1>Cart</h1>
+            <p onclick="closeNavbar()">
+                <i class="fa-solid fa-xmark"></i>
+            </p>
+            <div class="line"></div>
+            {% if product %}
+              <img src="{{ url_for('static', filename='searching_images/' + product['image_filename']) }}" alt="{{ product['image_name'] }}" width="120px" height="120px">
+            {% else %}
+              <p>Image not found.</p>
+            {% endif %}
+                <ol>
+                {% if item %}
+                <div class="name">
+                  <h4>{{ item['Item_name'] }}</h4>
+                
+                  <h4>Rs. {{ item['ItemPrice_per_quanity'] }}</h4>
+                </div>
+                <div class="details">
+                  <h4>{{ item['Item_Quanity']}} {{item['Quantity_measurement']}} ({{item['Quantity_Type']}})</h4>
+                </div>
+                  <div class="inputs">
+                    <input type="number" name="quantity" min="0" max="100" step="1"></input>
+                  </div> <div class="line-2"></div>
+
+                  <div class="button" id="button">
+                    <button>Place Order</button>
+                    <p>Including all taxes </p>
+                  </div>
+
+                {% else %}
+                  <p>No details found for this item.</p>
+                {% endif %}
+            </ol>
+
+    </div>
+    <script src="{{url_for('static', filename='order.js')}}"></script>
+</body>
+</html>

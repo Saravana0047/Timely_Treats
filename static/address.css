@@ -1,0 +1,118 @@
+body{
+  background: url(images/login_image.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: transparent; 
+  }
+
+
+  .major-contact{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 90vh;
+  }
+  .contact{
+    padding: 10px;
+    padding-right: 100px;
+    padding-left:100px;
+    padding-top: 30px;
+    padding-bottom: 23px;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(35, 84, 218, 0.2);
+    width: 300px;
+    border-bottom: 100px;
+
+
+  }
+  
+  .contact h1{
+    display: flex;
+    justify-content: center;
+    color: rgb(121, 0, 74);
+    padding-bottom: 7%;
+    text-align: center;
+    margin-bottom: 20px;
+    /* padding-left: -10%; */
+
+  }
+
+
+  .contact label{
+    color:#0f2341;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .contact-container input[type="text"]{
+    background: transparent;
+    width: calc(82% - 20px);
+    padding: 10px;
+    padding-right: 30%;
+    padding-bottom: 60px;
+    border: 1px solid #303d52;
+    border-radius: 10px;
+    margin-top: 10px;
+    justify-content: left;
+  }
+
+  .contact-container button{
+    padding: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 20px;
+    color: rgb(66, 20, 20);
+    cursor: pointer;
+    border-radius: 40px;
+    background: transparent;
+    padding-left: 90px;
+    border: 1px solid #0f2341;
+  }
+
+  #contact-button{
+    background: transparent;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 110%;
+    padding-right: 100px;
+  }
+
+  .signup{
+    display: flex;
+    justify-content: center;
+  }
+
+  .signup a {
+    color: #0f2341;
+    text-decoration: none;
+  }
+
+  .signup a:hover{
+    text-decoration: underline;
+  }
+
+  .namess i{
+    position: relative;
+    height: -100px;
+    size: 10px;
+    bottom: 120px;
+    left: 60px;
+    color: #0f2341;
+    margin-right: 100px;
+  }
+
+  /* Media Queries */
+  @media screen and (max-width: 700px) {
+    
+  }
+

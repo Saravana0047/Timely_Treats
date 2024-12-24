@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timely Treats</title>
+    <!-- CSS LINk -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <!-- Font Awesome link -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+.categories {
+    margin: 20px auto;
+    width: 90%;
+    font-family: Arial, sans-serif;
+}
+
+.category-section {
+    margin-bottom: 40px;
+}
+
+.category-section h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.category-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    justify-content: center;
+}
+
+.item-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    background-color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.item-card:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.item-image {
+    border-radius: 8px;
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensures images don't get stretched */
+    margin-bottom: 10px;
+}
+
+.item-card h3 {
+    font-size: 18px;
+    margin: 10px 0 5px;
+    color: #444;
+}
+
+.item-card p {
+    font-size: 14px;
+    color: #888;
+    margin: 0 0 10px;
+}
+
+.add-to-cart-btn {
+    padding: 8px 15px;
+    font-size: 14px;
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #e68900;
+}
+
+    </style>
+  </head>
+  <body>
+
+    <!-- Navbar -->
+    <div class="customer">
+      <h3>Welcome {{ customer_name }}!</h3>
+      <p>Glad to have you back.</p>
+    </div>
+    <nav class="navbar">
+      <h1>Timely Treats</h1>
+
+      <div class="navbar-menu" onclick="showNavbar()">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+
+      <div id="cart-icon" class="cart-icon" onclick="toggleCart()">
+        <i class="fa-solid fa-cart-shopping"></i>
+      </div>
+    </nav>
+
+    <button id="back-button" onclick="goBack()"> ⬅ </button> 
+<!-- Cart Side Bar -->
+
+<div id="cart-sidebar" class="cart-sidebar">
+  <p class="close-btn" onclick="toggleCart()">
+    <i class="fa-solid fa-xmark"></i>
+  </p>
+  <h1>My Cart</h1>
+
+  {% if cart_items %}
+  <div class="contents-10">
+    {% for item in cart_items %}
+    <div class="item-container">
+      <img class="cart-image" src="{{ url_for('static', filename='searching_images/' + item['Image_fileName']) }}" 
+           alt="{{ item['item_name'] }}">
+
+      <div class="item-details">
+        <div class="name-type">
+          <h4 class="name-10">{{ item['item_name'] }}</h4>
+          <h4 class="type-10">{{ item['item_type'] }}</h4>
+        </div>
+        <div class="quantity-price">
+          <div class="cart-item" data-cart-id="{{ item.cart_id }}">
+            <div class="quantity-controls">
+              <button class="minus-btn" data-cart-id="{{ item.cart_id }}">-</button>
+              <input 
+                type="number" 
+                class="quantity" 
+                value="{{ item.quantity }}" 
+                min="1" 
+                data-cart-id="{{ item.cart_id }}"
+              >
+              <button class="plus-btn" data-cart-id="{{ item.cart_id }}">+</button>
+          </div>
+          </div>
+          <p class="price-10"> ₹{{ item['item_price'] }}</p>
+        </div>
+        <div class="total">
+          <p class="total-10">Total: ₹{{ item['total_price'] }}</p>
+        </div>
+      </div>
+
+      <a class="remove-btn" href="#" onclick="removeItem(this)" data-cart-id="{{ item.cart_id }}">Remove</a>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="place-button-10">
+    <a href="/summary_2"><button>Place Order</button></a>
+  </div>
+  {% else %}
+  <p>Your cart is empty.</p>
+  {% endif %}
+</div>
+
+
+
+    <!-- Side navbar -->
+
+    <div class="side-navbar">
+      <p onclick="closeNavbar()">
+        <i class="fa-solid fa-xmark"></i>
+      </p>
+      <div>
+        <p class="side-navbar-link"><a href="index.html">Home</a></p>
+        <p class="side-navbar-link"><a href="items.html">Items</a></p>
+        <p class="side-navbar-link"><a href="view_order">My Orders</a></p>
+        <p class="side-navbar-link"><a href="contact.html">Contact</a></p>
+        <p class="side-navbar-link"><a href="/logout">Log out</a></p>
+      </div>
+    </div>
+    </div>
+
+    <!--Header-->
+
+    <div class="header">
+      <div>
+        <h1>Lets Begin your Fest</h1>
+        <p>With our Sweats</p>
+        <form action="{{ url_for('items') }}">
+        <button type="submit" class="header-button">Visit</button>
+      </form>
+      </div>
+
+      <div class="image">
+        <img
+          class="header-image"
+          src="{{ url_for('static', filename='images/laddu header image.jpg') }}" alt="My Image">
+      </div>
+    </div>
+    
+
+    <!-- Service -->
+
+    <div class="service">
+      <div class="service-container-1">
+        <div>
+          <h2>We Provide Yummy Sweets</h2>
+          <h2>Customer Experiance</h2>
+        </div>
+
+        <div>
+          <p>
+            || We ensure that our customer have the best shopping experiance
+          </p>
+        </div>
+      </div>
+      <div class="service-container-2">
+        <div>
+          <i class="fa-regular fa-face-smile"></i>
+          <h4>Satisfaction Guarantee</h4>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, et
+            odit. Quas, ex ad molestiae laboriosam laborum nihil accusantium
+            nesciunt commodi assumenda, maxime provident. Molestias nam
+            architecto repudiandae. Quo, delectus?
+          </p>
+        </div>
+        <div>
+          <i class="fa-regular fa-face-smile"></i>
+          <h4>Festive Sweets Arrivals</h4>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, et
+            odit. Quas, ex ad molestiae laboriosam laborum nihil accusantium
+            nesciunt commodi assumenda, maxime provident. Molestias nam
+            architecto repudiandae. Quo, delectus?
+          </p>
+        </div>
+        <div>
+          <i class="fa-regular fa-face-smile"></i>
+          <h4>Fast & Secure Delivery</h4>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, et
+            odit. Quas, ex ad molestiae laboriosam laborum nihil accusantium
+            nesciunt commodi assumenda, maxime provident. Molestias nam
+            architecto repudiandae. Quo, delectus?
+          </p>
+        </div>
+      </div>
+      </div>
+
+      <div class="img-top">
+        <h2>Signature Collections</h2>
+      </div>
+
+      <!-- Signature Items -->
+
+      <div class="categories">
+        {% for category, items in category_results.items() %}
+            <div class="category-section">
+                <h2>{{ category }}</h2>
+                <div class="category-items">
+                    {% for item in items %}
+                        <div class="item-card">
+                            <!-- Use item.id to create a link to order_details -->
+                            <a href="{{ url_for('order_details', id=item.id) }}" class="order-link">
+                                <img src="/static/searching_images/{{ item.Image_fileName }}" alt="{{ item.Item_name }}" class="item-image" height="250px" width="250px">
+                            </a>
+                            <h3>{{ item.Item_name }}</h3>
+                            <p>Stock: {{ item.stock }}</p>
+                            <a href="{{ url_for('order_details', id=item.id) }}" class="order-link">
+                            <button class="add-to-cart-btn" data-item-id="{{ item.id }}">Add to Cart</button>
+                          </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>        
+
+      <div class="products" id="products">
+          
+        {% for mysorepak in mysorepaks %}
+          <a href="{{ url_for('order_details', id=sweet.get('id', 0)) }}" class="order-link">
+            <img src="{{ url_for('static', filename='searching_images/' + mysorepak['Image_fileName']) }}" alt="{{ mysorepak['Item_name'] }}" width="200px" height="200px">
+            </a>
+            <h4>{{ mysorepak['Item_name'] }}</h4>
+
+            {% if mysorepak['stock'] > 0 %}
+            
+            {% else %}
+              <p class="out-of-stock">Out of Stock</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+</div>
+
+    <!-- News -->
+
+    <div class="news">
+      <h2>Join Our News Letter</h2>
+      <p>
+        Signup For our email newsletter to get exclusive discounts and updates
+      </p>
+      <div>
+        <input type="text" class="search" />
+      </div>
+      <div>
+        <button>Subscribe</button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+
+    <footer>
+      <div class="footer-container">
+        <!-- Contact Section -->
+        <div class="footer-contact">
+          <h3>Contact Us</h3>
+          <p>123, Sweets Street,<br> Coimbatore, India - 641105</p>
+          <p>Phone: +91 73588 13047</p>
+          <p>Email: timelytreats0047@gmail.com</p>
+        </div>
+    
+        <!-- Quick Links -->
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="home">Home</a></li>
+            <li><a href="#" class="our-story-link">Our Story</a></li>
+            <li><a href="items.html">Shop All</a></li>
+            <li><a href="privacy">Privacy Policy</a></li>
+            <li><a href="terms&conditions">Terms & Conditions</a></li>
+          </ul>
+        </div>
+    
+        <!-- Social Media -->
+        <div class="footer-social">
+          <h3>Follow Us</h3>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    
+      <!-- Copyright -->
+      <div class="footer-bottom">
+        <p>&copy; 2024 Timely Treats. All rights reserved.</p>
+      </div>
+
+      
+
+      <div class="about-us" style="display: none;">
+        <h5 class= "back-to-footer">Back</h5>
+        <h3>Our Story</h3>
+
+<p>Welcome to Timely Treats – your one-stop destination for delectable delights delivered just in time!
+
+At Timely Treats, we believe in making every celebration special and every ordinary day extraordinary. What started as a passion for crafting irresistible sweets and snacks has now blossomed into a platform that brings the joy of fresh, homemade treats to your doorstep.
+
+Our journey began with a simple mission: to blend tradition with convenience. We honor age-old recipes and combine them with modern techniques to ensure every bite is a delightful experience. Whether you're craving nostalgic flavors or exploring new tastes, our menu has something for everyone.
+</p>
+<br>
+
+<h4>Why Choose Us?</h4>
+<br>
+
+<p><h4>Freshness Guaranteed:</h4> 
+      Each item is prepared with the finest ingredients to ensure unparalleled taste and quality.</p>
+<p><h4>Seasonal Specials:</h4> 
+      Our treats are tailored to match the seasons and festivals, keeping the joy alive all year round.</p>
+<p><h4>Timely Delivery:</h4>
+      As our name suggests, we take pride in ensuring your treats arrive right when you need them.</p>
+<br>
+<p>At Timely Treats, it’s more than just food – it’s about creating memories, spreading happiness, and sharing the love of good taste.
+
+Join us on this flavorful journey, and let’s make every moment sweet and savory together!</p>
+  </div>
+
+    </footer>
+        <script src="{{url_for('static', filename='index.js')}}"></script>
+    </form>
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+  </body>
+</html>

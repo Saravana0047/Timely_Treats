@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #0d2642;
+            text-align: center;
+        }
+        h3 {
+            color: #444;
+            margin-top: 20px;
+        }
+        p {
+            margin: 10px 0;
+        }
+        .address {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-top: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Thank you for your order, {{ name }}!</h2>
+        <p>Your order has been confirmed and will be delivered to:</p>
+
+        <div class="address">
+            <p>{{ address }},<br>
+            {{ city }}, {{ state }} - {{ pincode }}</p>
+             
+        </div>
+
+        <h3>Order Details:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Price Per Unit</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td>{{ item.item_name }}</td>
+                    <td>{{ item['item_type'] }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>₹{{ item.item_price }}</td>
+                    <td>₹{{ item.total_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <p><strong>Gross Total (Including GST):</strong> ₹{{ gross_total }}</p>
+
+        <p>We will notify you once your order is on the way!</p>
+        <p>Thank you for shopping with Timely Treats!</p>
+
+        <div class="footer">
+            <p>Timely Treats &copy; {{ current_year }}</p>
+        </div>
+    </div>
+</body>
+</html>

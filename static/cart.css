@@ -1,0 +1,123 @@
+/* General body styling */
+.container-10 {
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    margin-top: 100px;
+    margin-right: 45px;
+}
+
+.container-10 p{
+    margin-top: 10px;
+    margin-right: -120px;
+}
+
+/* Nav Main title */
+.box-10 h1 {
+    margin-left: -100px;
+    padding-bottom: 20px;
+}
+
+/* Nav Image styling */
+.contents-10 img {
+    width: 100px;
+    margin-left: -200px;
+    border-radius: 15px;
+}
+
+/* Cart item styling */
+.items-10 a {
+    float: right;
+    margin-top: -40px;
+}
+
+.name-10 {
+    margin-top: -150px;
+    margin-left: -90px;
+}
+
+.type-10 {
+    margin-top: -45px;
+    margin-left: 45px;
+}
+
+.price-10 {
+    margin-top: 20px;
+    margin-left: 40px;
+}
+
+.quantity-10 {
+    margin-top: -40px;
+    margin-left: -90px;
+}
+
+.total-10 {
+    margin-top: 10px;
+    margin-left: -90px;
+}
+
+/* Place Order button styling */
+.place-button-10 button{
+    position: fixed;
+    width: 20%;
+    padding: 10px;
+    right: 65px;
+    bottom: 40px;
+    border-radius: 20px;
+    border: 2px solid rgb(253, 250, 250);
+    background-color: rgb(7, 7, 49);
+    color: aliceblue;
+}
+
+
+/* Initially hide the cart */
+.cart-container-10 {
+    position: fixed;
+    top: 0;
+    right: 0%; 
+    width: 30%; 
+    height: 100%;
+    background-color: #fff;
+    box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+  }
+  
+.container-10 {
+    margin-top: 20px;
+}
+
+
+.contents-10 {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.name-10, .type-10, .price-10, .quantity-10, .total-10 {
+    font-size: 16px;
+    color: #333;
+}
+
+.contents-10 img {
+    margin-bottom: 10px;
+}
+
+
+.items-10 a {
+    color: red;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+
+.items-10 {
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.cart-container-10 button:hover {
+    background-color: #555;
+}
