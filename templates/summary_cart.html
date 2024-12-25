@@ -120,10 +120,11 @@
 
             <!-- Shipping Address and Payment Container -->
             <div id="form-container">
-                <form id="shipping-form" action="{{ url_for('process_payment') }}" method="post">
                 <!-- Shipping Address Section -->
                 <div class="shipping-address" id="shipping-address">
                     <h2>Shipping Address</h2>
+                    <form id="shipping-form" action="{{ url_for('process_payment') }}" method="post">
+                    <form action="/process_payment" method="POST" id="payment-form">
                         <input type="text" name="fullname" placeholder="Full Name">
                         <div class="address">
                             <input type="text" name="address" placeholder="Address (House no, Building, Street, Area)">
@@ -145,9 +146,17 @@
                             <label for="billing-checkbox">Billing address is same as Shipping address</label>
                         </div>
                     <div class="place-order">
-                        <a href="javascript:void(0);">
-                            <button class="place-order-button" id="save-continue-button">Save & Continue</button>
-                        </a>
+                        <div class="place-order">
+                        <form action="/my_order" method="POST" id="order-form">
+                            <input type="hidden" name="customer_id" value="{{ session['customer_id'] }}">
+                            <input type="hidden" name="item" value="{{ item_name }}">
+                            <input type="hidden" name="order_category" value="{{ order_category }}">
+                            <input type="hidden" name="quantity" value="{{ quantity }}">
+                            <input type="hidden" name="price_per_quantity" value="{{ item_price }}"> 
+                            <button type="button" class="place-order-button" id="save-continue-button">Save & Continue</button>
+                    </form>
+                    </div>
+                        
                     </div>
                 </div>
 
@@ -186,11 +195,12 @@
                     </div>
 
                     <button type="submit">Pay Now</button>
+                            </form>
+                        </form>
+                    </form>
                 </div>
             </div>
         </div>
-    </form>
-    </form>
     </div>
     <script src="{{ url_for('static', filename='order.js') }}"></script>
     <script>
