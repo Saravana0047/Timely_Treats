@@ -172,6 +172,82 @@ body{
 
     
   /* Media Queries */
-    @media screen and (max-width: 700px) {
-    
+@media screen and (max-width: 700px) {
+  body {
+    background-size: cover;
+    margin: 0;
+    padding: 0;
   }
+
+  .major-contact {
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+    min-height: auto;
+    padding: 20px;
+  }
+
+  .contact {
+    width: 90%;
+    padding: 20px;
+    margin: 0;
+    box-shadow: 0 0 10px rgba(35, 84, 218, 0.2);
+  }
+
+  .contact h1 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+  }
+
+  .contact-container input[type="text"],
+  .contact-container input[type="password"] {
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 10px;
+  }
+
+  .contact-container button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  .names {
+    flex-direction: column;
+  }
+
+  .names p,
+  .namess p {
+    margin: 10px 0;
+    width: 100%;
+  }
+
+  .names i,
+  .namess i {
+    position: relative;
+    top: 0;
+    right: 0;
+    left: auto;
+    margin-left: 10px;
+    display: none;
+  }
+
+  .forget-link,
+  .signup {
+    text-align: center;
+    font-size: 0.9em;
+  }
+
+  .signup a {
+    font-size: 0.9em;
+  }
+
+  .names i{
+display: none;
+  }
+
+  .names p, input{
+    width: 97%;
+  }
+}
