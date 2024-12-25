@@ -6,6 +6,48 @@
     <title>Timely Treats</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='loginstyle.css') }}" >
 </head>
+
+<style>
+@media screen and (max-width: 700px) {
+    .major-contact {
+        flex-direction: column;
+        align-items: center;
+        margin: 0 20px;
+    }
+
+    .contact {
+        width: 100%;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(35, 84, 218, 0.1);
+    }
+
+    .contact h1 {
+        font-size: 1.7rem;
+        text-align: center;
+        margin-left: -60px;
+    }
+
+    .contact-container input[type="text"],
+    .contact-container input[type="password"] {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .contact-container button {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .forget-link a {
+        font-size: 14px;
+    }
+
+    .signup {
+        font-size: 14px;
+        text-align: center;
+    }
+}
+</style>
 <body>
 
     <div class="major-contact">
