@@ -38,11 +38,87 @@ def get_db_connection():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    customer_id = session.get('customer_id')
+    if not customer_id:
+        return redirect(url_for('login'))
+    
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)  # Use dictionary cursor
 
-@app.route('/index.html')
+        categories = {
+            "Mysore Pak": "SELECT id, Item_name, Image_fileName, stock FROM inventory WHERE Special = 'Mysore pak signature'",
+            "Soan Papdi": "SELECT id, Item_name, Image_fileName, stock FROM inventory WHERE Special = 'soanpapdi signature'",
+            "Burfi": "SELECT id, Item_name, Image_fileName, stock FROM inventory WHERE Special = 'Burfi signature'",
+            "Milk Sweets": "SELECT id, Item_name, Image_fileName, stock FROM inventory WHERE Special = 'Milk signature'",
+            "Halwa": "SELECT id, Item_name, Image_fileName, stock FROM inventory WHERE Special = 'halwa signature'",
+            "Kaju Sweets": "SELECT id, Item_name, Image_fileName, stock FROM inventory WHERE Special = 'kaju signature'",
+            "Mixture": "SELECT id, Item_name, Image_fileName, stock FROM inventory WHERE Special = 'mixture signature'"
+        }
+
+        category_results = {}
+        for category, query in categories.items():
+            cursor.execute(query)
+            category_results[category] = [
+                {
+                    "id": row["id"],
+                    "Item_name": row["Item_name"],
+                    "Image_fileName": row["Image_fileName"],
+                    "stock": row["stock"]
+                }
+                for row in cursor.fetchall()
+            ]
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+        category_results = {key: [] for key in categories.keys()}
+    finally:
+        cursor.close()
+        conn.close()
+
+    return render_template('index.html', category_results=category_results)
+
+
+@app.route('/home-index')
 def home2():
-    return render_template('index.html')
+    customer_id = session.get('customer_id')
+    if not customer_id:
+        return redirect(url_for('login'))
+    
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)  # Use dictionary cursor
+
+        categories = {
+            "Mysore Pak": "SELECT id, Item_name, Image_fileName, stock FROM inventory WHERE Special = 'Mysore pak signature'",
+            "Soan Papdi": "SELECT id, Item_name, Image_fileName, stock FROM inventory WHERE Special = 'soanpapdi signature'",
+            "Burfi": "SELECT id, Item_name, Image_fileName, stock FROM inventory WHERE Special = 'Burfi signature'",
+            "Milk Sweets": "SELECT id, Item_name, Image_fileName, stock FROM inventory WHERE Special = 'Milk signature'",
+            "Halwa": "SELECT id, Item_name, Image_fileName, stock FROM inventory WHERE Special = 'halwa signature'",
+            "Kaju Sweets": "SELECT id, Item_name, Image_fileName, stock FROM inventory WHERE Special = 'kaju signature'",
+            "Mixture": "SELECT id, Item_name, Image_fileName, stock FROM inventory WHERE Special = 'mixture signature'"
+        }
+
+        category_results = {}
+        for category, query in categories.items():
+            cursor.execute(query)
+            category_results[category] = [
+                {
+                    "id": row["id"],
+                    "Item_name": row["Item_name"],
+                    "Image_fileName": row["Image_fileName"],
+                    "stock": row["stock"]
+                }
+                for row in cursor.fetchall()
+            ]
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+        category_results = {key: [] for key in categories.keys()}
+    finally:
+        cursor.close()
+        conn.close()
+
+    return render_template('index.html', category_results=category_results)
+
 
 @app.route('/login.html', methods=['GET', 'POST'])
 def login():
