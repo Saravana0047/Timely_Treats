@@ -16,10 +16,88 @@
       referrerpolicy="no-referrer"
     />
     <style>
+
+      
+      .categories {
+          margin: 20px auto;
+          width: 90%;
+          font-family: Arial, sans-serif;
+      }
+      
+      .category-section {
+          margin-bottom: 40px;
+      }
+      
+      .category-section h2 {
+          font-size: 24px;
+          text-align: center;
+          margin-bottom: 20px;
+          color: #333;
+      }
+      
+      .category-items {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          gap: 20px;
+          justify-content: center;
+      }
+      
+      .item-card {
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          padding: 15px;
+          text-align: center;
+          background-color: #fff;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .item-card:hover {
+          transform: scale(1.05); /* Slight zoom effect */
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      
+      .item-image {
+          border-radius: 8px;
+          width: 100%;
+          height: auto;
+          object-fit: cover; /* Ensures images don't get stretched */
+          margin-bottom: 10px;
+      }
+      
+      .item-card h3 {
+          font-size: 18px;
+          margin: 10px 0 5px;
+          color: #444;
+      }
+      
+      .item-card p {
+          font-size: 14px;
+          color: #888;
+          margin: 0 0 10px;
+      }
+      
+      .add-to-cart-btn {
+          padding: 8px 15px;
+          font-size: 14px;
+          background-color: #ff9800;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+      }
+      
+      .add-to-cart-btn:hover {
+          background-color: #e68900;
+      }
+
       .cart-icon{
         margin-top: -40px;
       }
-    </style>
+      
+          </style>
+      
   </head>
   <body>
     <!-- Navbar -->
@@ -40,7 +118,7 @@
         <i class="fa-solid fa-xmark"></i>
       </p>
       <div>
-        <p class="side-navbar-link"><a href="index.html">Home</a></p>
+        <p class="side-navbar-link"><a href="home">Home</a></p>
         <p class="side-navbar-link"><a href="items.html">Items</a></p>
         <p class="side-navbar-link"><a href="contact.html">Contact</a></p>
         <p class="side-navbar-link"><a href="my_order.html">My Orders</a></p>
@@ -118,71 +196,53 @@
         <h2>Festive Specials</h2>
       </div>
 
-      <div class="new-arrivals">
-        <div class="new-arrival-container">
-          <img src="{{ url_for('static', filename='images/cup ss_11zon.jpg') }}" alt="My Image">
-          <button>Order Now <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
-
-        <div class="new-arrival-container">
-          <img src="{{ url_for('static', filename='images/4 sweets ss_11zon.jpg') }}" alt="My Image">
-          <button>Order Now <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
-
-        <div class="new-arrival-container">
-          <img src="{{ url_for('static', filename='images/new ss image_11zon.jpg') }}" alt="My Image">
-          <button>Order Now <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
-
-        <div class="new-arrival-container">
-          <img src="{{ url_for('static', filename='images/designs sweets ss_11zon.jpg') }}" alt="My Image">
-          <button>Order Now <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
-      </div>
-
-      <!-- Most Wanted -->
+      <!-- Signature Items -->
 
       <div class="img-top">
-        <h2>Most Wanted</h2>
+        <h2>Signature Collections</h2>
       </div>
 
-      <div class="new-arrivals">
-        <div class="new-arrival-container">
-          <img src="{{ url_for('static', filename='images/designs sweets ss_11zon.jpg') }}" alt="My Image">
-          <button>Order Now <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
+      <!-- Signature Items -->
 
-        <div class="new-arrival-container">
-          <img src="{{ url_for('static', filename='images/new ss image_11zon.jpg') }}" alt="My Image">
-          <button>Order Now <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
+      <div class="categories">
+        {% for category, items in category_results.items() %}
+            <div class="category-section">
+                <h2>{{ category }}</h2>
+                <div class="category-items">
+                    {% for item in items %}
+                        <div class="item-card">
+                            <!-- Use item.id to create a link to order_details -->
+                            <!-- <a href="{{ url_for('order_details', id=item.id) }}" class="order-link"> -->
+                                <img src="/static/searching_images/{{ item.Image_fileName }}" alt="{{ item.Item_name }}" class="item-image" height="250px" width="250px">
+                            <!-- </a> -->
+                            <h3>{{ item.Item_name }}</h3>
+                            <p>Stock: {{ item.stock }}</p>
+                            <!-- <a href="{{ url_for('order_details', id=item.id) }}" class="order-link"> -->
+                            <button class="add-to-cart-btn" data-item-id="{{ item.id }}">Add to Cart</button>
+                          <!-- </a> -->
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>        
 
-        <div class="new-arrival-container">
-          <img src="{{ url_for('static', filename='images/cup ss_11zon.jpg') }}" alt="My Image">
-          <button>Order Now <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
+      <div class="products" id="products">
+          
+        {% for mysorepak in mysorepaks %}
+          <!-- <a href="{{ url_for('order_details', id=sweet.get('id', 0)) }}" class="order-link"> -->
+            <img src="{{ url_for('static', filename='searching_images/' + mysorepak['Image_fileName']) }}" alt="{{ mysorepak['Item_name'] }}" width="200px" height="200px">
+            <!-- </a> -->
+            <h4>{{ mysorepak['Item_name'] }}</h4>
 
-        <div class="new-arrival-container">
-          <img src="{{ url_for('static', filename='images/4 sweets ss_11zon.jpg') }}" alt="My Image">
-          <button>Order Now <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- News -->
-
-    <div class="news">
-      <h2>Join Our News Letter</h2>
-      <p>
-        Signup For our email newsletter to get exclusive discounts and updates
-      </p>
-      <div>
-        <input type="text" class="search" />
-      </div>
-      <div>
-        <button>Subscribe</button>
-      </div>
-    </div>
+            {% if mysorepak['stock'] > 0 %}
+            
+            {% else %}
+              <p class="out-of-stock">Out of Stock</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+</div>
 
     <!-- Footer -->
 
@@ -206,5 +266,76 @@
     <script src="{{url_for('static', filename='index.js')}}"></script>
     <script src="{{ url_for('static', filename='order.js') }}"></script>
     </form>
+
+        <!-- Footer -->
+
+    <footer>
+      <div class="footer-container">
+        <!-- Contact Section -->
+        <div class="footer-contact">
+          <h3>Contact Us</h3>
+          <p>123, Sweets Street,<br> Coimbatore, India - 641105</p>
+          <p>Phone: +91 73588 13047</p>
+          <p>Email: timelytreats0047@gmail.com</p>
+        </div>
+    
+        <!-- Quick Links -->
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="home">Home</a></li>
+            <li><a href="#" class="our-story-link">Our Story</a></li>
+            <li><a href="items.html">Shop All</a></li>
+            <li><a href="privacy">Privacy Policy</a></li>
+            <li><a href="terms&conditions">Terms & Conditions</a></li>
+          </ul>
+        </div>
+    
+        <!-- Social Media -->
+        <div class="footer-social">
+          <h3>Follow Us</h3>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    
+      <!-- Copyright -->
+      <div class="footer-bottom">
+        <p>&copy; 2024 Timely Treats. All rights reserved.</p>
+      </div>
+
+      
+
+      <div class="about-us" style="display: none;">
+        <h5 class= "back-to-footer">Back</h5>
+        <h3>Our Story</h3>
+
+<p>Welcome to Timely Treats – your one-stop destination for delectable delights delivered just in time!
+
+At Timely Treats, we believe in making every celebration special and every ordinary day extraordinary. What started as a passion for crafting irresistible sweets and snacks has now blossomed into a platform that brings the joy of fresh, homemade treats to your doorstep.
+
+Our journey began with a simple mission: to blend tradition with convenience. We honor age-old recipes and combine them with modern techniques to ensure every bite is a delightful experience. Whether you're craving nostalgic flavors or exploring new tastes, our menu has something for everyone.
+</p>
+<br>
+
+<h4>Why Choose Us?</h4>
+<br>
+
+<p><h4>Freshness Guaranteed:</h4> 
+      Each item is prepared with the finest ingredients to ensure unparalleled taste and quality.</p>
+<p><h4>Seasonal Specials:</h4> 
+      Our treats are tailored to match the seasons and festivals, keeping the joy alive all year round.</p>
+<p><h4>Timely Delivery:</h4>
+      As our name suggests, we take pride in ensuring your treats arrive right when you need them.</p>
+<br>
+<p>At Timely Treats, it’s more than just food – it’s about creating memories, spreading happiness, and sharing the love of good taste.
+
+Join us on this flavorful journey, and let’s make every moment sweet and savory together!</p>
+  </div>
+
+</footer>
+
   </body>
 </html>
