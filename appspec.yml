@@ -1,18 +1,50 @@
 version: 0.0
 os: linux
 files:
-  - source: /index.html
-    destination: /var/www/html/
+  - source: /templates/
+    destination: /var/www/html/templates/
+
+  - source: /static/
+    destination: /var/www/html/static/
+
+  - source: /app.py
+    destination: /var/www/html/app.py
+
+  - source: /admin.py
+    destination: /var/www/html/admin.py
+  - source: /login.py
+    destination: /var/www/html/login.py
+  - source: /password.py
+    destination: /var/www/html/password.py
+  - source: /payment.py
+    destination: /var/www/html/payment.py
+  - source: /signup.py
+    destination: /var/www/html/signup.py
+  - source: /data.py
+    destination: /var/www/html/data.py
+  - source: /forgetpass.py
+    destination: /var/www/html/forgetpass.py
+
+  - source: /buildspec.yml
+    destination: /var/www/html/buildspec.yml
+
+  - source: /gitattributes
+    destination: /var/www/html/gitattributes
+
+  - source: /scripts/
+    destination: /var/www/html/scripts/
+
 hooks:
   BeforeInstall:
     - location: scripts/install_dependencies
       timeout: 300
       runas: root
+
     - location: scripts/start_server
       timeout: 300
       runas: root
+
   ApplicationStop:
     - location: scripts/stop_server
       timeout: 300
       runas: root
-
