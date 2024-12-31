@@ -1,31 +1,19 @@
 version: 0.0
 os: linux
-
 files:
-  - source: /Saravana0047-Timely_Treats/
-    destination: /var/www/html/
-  
-permissions:
-  - object: /var/www/html
-    owner: ec2-user
-    group: ec2-user
-    mode: 755
-    type:
-      - directory
-      - file
-
+  - source: /
+    destination: /home/ec2-user/Saravana0047-Timely_Treats
+ 
 hooks:
   BeforeInstall:
     - location: scripts/stop_server
       timeout: 300
-      runas: root
-
+      runas: ec2-user
   AfterInstall:
     - location: scripts/install_dependencies
       timeout: 300
-      runas: root
-
+      runas: ec2-user
   ApplicationStart:
     - location: scripts/start_server
       timeout: 300
-      runas: root
+      runas: ec2-user
